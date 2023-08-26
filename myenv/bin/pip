@@ -1,4 +1,4 @@
-#!/Users/sergejmalarov/PycharmProjects/malyarov_hw_django_eshop/myenv/bin/python3
+#!/Users/sergejmalarov/PycharmProjects/malyarov_hw_django_eshop/myenv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

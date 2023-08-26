@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контактная информация</title>
+</head>
+<body>
+    <header>
+        <h1>Контакты</h1>
+    </header>
+    <nav>
+        <a href="/">Домой</a> | <a href="/contact/">Контакты</a>
+    </nav>
+    <main>
+
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+        </form>
+
+
+
+
+        <h2>Наши контакты:</h2>
+        <address>
+            <p>Адрес: ул. Примерная, д. 10, г. Примерград, 123456</p>
+            <p>Телефон: +7 (123) 456-78-90</p>
+            <p>Email: example@example.com</p>
+        </address>
+    </main>
+    <footer>
+        <p>Все права защищены, 2023.</p>
+    </footer>
+</body>
+</html>
