@@ -29,6 +29,31 @@ def home(request):
     return render(request, 'home.html', {'products': products})
 
 
+#представление для добавления продукта и постраничный вывод
+
+from django.shortcuts import render, redirect
+from .models import Product
+from .forms import ProductForm
+from django.core.paginator import Paginator
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')
+    else:
+        form = ProductForm()
+    return render(request, 'add_product.html', {'form': form})
+
+def product_list(request):
+    products = Product.objects.all()
+    paginator = Paginator(products, 10)  # 10 продуктов на страницу
+    page = request.GET.get('page')
+    products_on_page = paginator.get_page(page)
+    return render(request, 'product_list.html', {'products': products_on_page})
+
+
 #
 # #Контроллер для страницы с контактной информацией
 # def contact(request):
