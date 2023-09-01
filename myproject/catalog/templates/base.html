@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Общие мета-теги, стили и т. д. -->
+</head>
+<body>
+    <div class="menu">
+        {% include 'menu.html' %}
+    </div>
+    <div class="content">
+        {% block content %}{% endblock %}
+
+      {% load custom_tags %}
+
+<!-- Используя фильтр -->
+<img src="{{ object.image|mediapath }}" />
+
+<!-- Используя тег -->
+<img src="{% mediapath_tag object.image %}" />
+
+
+    </div>
+</body>
+</html>

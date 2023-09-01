@@ -9,11 +9,22 @@
     <header>
         <h1>Интернет-магазин домашнего задания SkyPro!</h1>
     </header>
-    <nav>
-        <a href="/">Домой</a> | <a href="/contact/">Контакты</a>
-    </nav>
+
     <main>
         <p>Важная информация для посетителей интернет-магазина</p>
+
+
+        {% for product in products %}
+    <div class="product">
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description|truncatechars:100 }}</p>
+
+    </div>
+{% endfor %}
+
+
+
+
     </main>
     <footer>
         <p>Все права защищены, 2023.</p>
