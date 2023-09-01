@@ -1,5 +1,18 @@
+{% extends 'base.html' %}
+
+
 {% for product in products %}
-    <!-- Вывод информации о продукте -->
+
+{% block main %}
+    {% for product in products %}
+        <div class="product">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description|truncatechars:100 }}</p>
+            <!-- Добавьте другие поля продукта, если необходимо -->
+        </div>
+    {% endfor %}
+{% endblock %}
+
 {% endfor %}
 
 <div class="pagination">
