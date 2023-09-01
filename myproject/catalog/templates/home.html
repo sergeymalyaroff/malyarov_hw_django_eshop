@@ -1,33 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Домашняя страница</title>
-</head>
-<body>
-    <header>
-        <h1>Интернет-магазин домашнего задания SkyPro!</h1>
-    </header>
+{% extends 'base.html' %}
 
-    <main>
-        <p>Важная информация для посетителей интернет-магазина</p>
+{% block title %}Домашняя страница{% endblock %}
 
+{% block main %}
+    <p class="mb-4">Важная информация для посетителей интернет-магазина</p>
 
+    <div class="row">
         {% for product in products %}
-    <div class="product">
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.description|truncatechars:100 }}</p>
-
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <!-- Плейсхолдер для изображения продукта -->
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-{% endfor %}
-
-
-
-
-    </main>
-    <footer>
-        <p>Все права защищены, 2023.</p>
-    </footer>
-</body>
-</html>
+{% endblock %}

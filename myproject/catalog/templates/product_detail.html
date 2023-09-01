@@ -1,4 +1,10 @@
-<!-- Вставьте здесь ваш шаблон, и замените соответствующие части -->
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block main %}
+
+
 
 <div class="container">
     <div class="row text-center">
@@ -20,3 +26,7 @@
         </div>
     </div>
 </div>
+
+
+
+{% endblock %}
