@@ -1,50 +1,87 @@
 from django.shortcuts import render, redirect
+from .models import Product
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 
 
 
 #Контроллер для домашней страницы
-def home(request):
-    return render(request, 'home.html')
+from django.views.generic import TemplateView
+
+class HomeView(ListView):
+    model = Product
+    template_name = 'home.html'
+    context_object_name = 'products'
+
+
 
 #Контроллер для страницы с контактной информацией
-def contact(request):
-    return render(request, 'contact.html')
+class ContactView(TemplateView):
+    template_name = 'contact.html'
+
 
 
 # Отображение страницы товара:
 
-from django.shortcuts import render, get_object_or_404
-from .models import Product
+from django.views.generic.detail import DetailView
 
-def product_detail(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    return render(request, 'catalog/product_detail.html', {'product': product})
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
+
 
 # Вывод списка товаров
 
-from .models import Product
+from django.views.generic.list import ListView
 
-def home(request):
-    products = Product.objects.all()
-    return render(request, 'home.html', {'products': products})
+class ProductListView(ListView):
+    model = Product
+    template_name = 'home.html'
+    context_object_name = 'products'
+    paginate_by = 10
+
 
 
 #представление для добавления продукта и постраничный вывод
 
-from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView
 from .models import Product
 from .forms import ProductForm
-from django.core.paginator import Paginator
 
-def add_product(request):
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('product_list')
-    else:
-        form = ProductForm()
-    return render(request, 'add_product.html', {'form': form})
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'add_product.html'
+    success_url = '/products/'  # URL для перехода после успешного создания объекта
+
+
+# Редактирование товара
+
+from django.views.generic.edit import UpdateView
+from .models import Product
+from .forms import ProductForm
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'edit_product.html'
+    success_url = '/products/'  # URL для перехода после успешного редактирования объекта
+
+# удаление товара
+
+from django.views.generic.edit import DeleteView
+from .models import Product
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'confirm_delete.html'
+    success_url = '/products/'  # URL для перехода после успешного удаления объекта
+
+
+
 
 def product_list(request):
     products = Product.objects.all()
