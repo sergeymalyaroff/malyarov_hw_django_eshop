@@ -1,6 +1,8 @@
 
 from django.urls import path
 from .views import HomeView, ContactView, ProductDetailView, ProductListView, ProductCreateView, ProductUpdateView, ProductDeleteView
+from .views import post_list_view
+
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),  # Домашняя страница
@@ -11,4 +13,6 @@ urlpatterns = [
     # редактирование и удаление продуктов:
     path('edit_product/<int:pk>/', ProductUpdateView.as_view(), name='edit_product'), # редактирование продукта
     path('delete_product/<int:pk>/', ProductDeleteView.as_view(), name='delete_product'), # удаление продукта
+
+    path('posts/', post_list_view, name='post_list'),
 ]

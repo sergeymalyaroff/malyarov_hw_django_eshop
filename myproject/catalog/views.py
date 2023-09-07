@@ -91,6 +91,23 @@ def product_list(request):
     return render(request, 'product_list.html', {'products': products_on_page})
 
 
+# Вывод блога
+
+
+from django.views.generic import TemplateView
+from .models import Post
+
+class HomeView(TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['latest_posts'] = Post.objects.filter(is_published=True).order_by('-created_date')[:5]  # например, 5 последних записей
+        return context
+
+
+
+
 #
 # #Контроллер для страницы с контактной информацией
 # def contact(request):
