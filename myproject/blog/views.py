@@ -29,8 +29,8 @@ class PostListView(ListView):
 
 class PostCreateView(CreateView):
     model = BlogPost
-    template_name = 'catalog/post_form.html'
-    fields = ['title', 'slug', 'content', 'preview_image', 'is_published']
+    template_name = 'blog/post_form.html'
+    fields = ['title', 'slug', 'content', 'preview', 'is_published']
 
     def form_valid(self, form):
         form.instance.slug = slugify(form.instance.title)
