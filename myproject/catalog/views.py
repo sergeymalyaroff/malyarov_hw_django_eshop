@@ -108,7 +108,6 @@ class HomeView(TemplateView):
 
 
 
-#
 # #Контроллер для страницы с контактной информацией
 # def contact(request):
 #     if request.method == 'POST':
