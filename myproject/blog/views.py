@@ -12,7 +12,7 @@ from django.views.generic import DeleteView
 
 class PostDetailView(DetailView):
     model = BlogPost
-    template_name = 'detail.html'
+    template_name = 'post_detail.html'
 
     def get_object(self):
         obj = super().get_object()

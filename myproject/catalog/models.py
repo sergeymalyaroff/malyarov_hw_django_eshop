@@ -16,13 +16,8 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
 
-
-
-
-
-# модель Пост
-
-from django.db import models
+    def __str__(self):
+        return self.name
 
 class Post(models.Model):
     title = models.CharField(max_length=200, verbose_name="Заголовок")
@@ -34,11 +29,18 @@ class Post(models.Model):
     views_count = models.PositiveIntegerField(default=0, verbose_name="Количество просмотров")
 
     def __str__(self):
-            return self.title
+        return self.title
 
     class Meta:
-            verbose_name = "Блоговая запись"
-            verbose_name_plural = "Блоговые записи"
+        verbose_name = "Блоговая запись"
+        verbose_name_plural = "Блоговые записи"
 
-    def __str__(self):
-        return self.name
+
+
+ # Модель версий для отображения версий
+
+    class Version(models.Model):
+        product = models.ForeignKey(Product, on_delete=models.CASCADE)
+        version_number = models.CharField(max_length=255)
+        version_name = models.CharField(max_length=255)
+        is_current = models.BooleanField(default=False)

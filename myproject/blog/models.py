@@ -6,7 +6,7 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     slug = models.CharField(max_length=200, unique=True)
     content = models.TextField()
-    preview = models.ImageField(upload_to='blog_previews/')
+    preview = models.ImageField(upload_to='posts/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=True)
     views_count = models.PositiveIntegerField(default=0)

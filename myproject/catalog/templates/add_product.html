@@ -2,9 +2,21 @@
 
 {% block main %}
     <h2>Добавить продукт</h2>
-    <form method="post" enctype="multipart/form-data">
+
+
+
+    {% load crispy_forms_tags %}
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Добавить продукт</button>
+        {% crispy form %}
+        <button type="submit">Сохранить</button>
     </form>
+
+
+
+<!--    <form method="post" enctype="multipart/form-data">-->
+<!--        {% csrf_token %}-->
+<!--        {{ form.as_p }}-->
+<!--        <button type="submit">Добавить продукт</button>-->
+<!--    </form>-->
 {% endblock %}
