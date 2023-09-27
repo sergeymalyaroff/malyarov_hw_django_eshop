@@ -28,7 +28,7 @@ from .models import Product
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
-    fields = ['model', 'form_class']
+    fields = ['name', 'description']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
