@@ -39,8 +39,14 @@ class Post(models.Model):
 
  # Модель версий для отображения версий
 
-    class Version(models.Model):
-        product = models.ForeignKey(Product, on_delete=models.CASCADE)
-        version_number = models.CharField(max_length=255)
-        version_name = models.CharField(max_length=255)
-        is_current = models.BooleanField(default=False)
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    version_number = models.CharField(max_length=255)
+    version_name = models.CharField(max_length=255)
+    is_current = models.BooleanField(default=False)
+
+    class Meta:
+
+        ordering = ['version_number']  # Сортировка по умолчанию
+        verbose_name = 'Версия'
+        verbose_name_plural = 'Версии'

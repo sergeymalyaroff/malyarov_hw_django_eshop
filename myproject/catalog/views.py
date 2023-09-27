@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
-from .models import Product
-from django.views.generic.list import ListView
+from .models import Post
+from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
-
-
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
+from .forms import ProductForm
+from django.views.generic.edit import DeleteView
+from .models import Product
 
 #Контроллер для домашней страницы
-from django.views.generic import TemplateView
+
 
 class HomeView(ListView):
     model = Product
@@ -25,7 +27,6 @@ class ContactView(TemplateView):
 
 # Отображение страницы товара:
 
-from django.views.generic.detail import DetailView
 
 class ProductDetailView(DetailView):
     model = Product
@@ -35,7 +36,7 @@ class ProductDetailView(DetailView):
 
 # Вывод списка товаров
 
-from django.views.generic.list import ListView
+
 
 class ProductListView(ListView):
     model = Product
@@ -47,9 +48,7 @@ class ProductListView(ListView):
 
 #представление для добавления продукта и постраничный вывод
 
-from django.views.generic.edit import CreateView
-from .models import Product
-from .forms import ProductForm
+
 
 class ProductCreateView(CreateView):
     model = Product
@@ -60,9 +59,7 @@ class ProductCreateView(CreateView):
 
 # Редактирование товара
 
-from django.views.generic.edit import UpdateView
-from .models import Product
-from .forms import ProductForm
+
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -72,8 +69,7 @@ class ProductUpdateView(UpdateView):
 
 # удаление товара
 
-from django.views.generic.edit import DeleteView
-from .models import Product
+
 
 class ProductDeleteView(DeleteView):
     model = Product
@@ -94,8 +90,7 @@ def product_list(request):
 # Вывод блога
 
 
-from django.views.generic import TemplateView
-from .models import Post
+
 
 class HomeView(TemplateView):
     template_name = 'home.html'
