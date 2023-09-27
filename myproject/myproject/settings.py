@@ -47,6 +47,9 @@ INSTALLED_APPS = [
 
     'user_app',
 
+    'allauth',
+    'allauth.account',
+
 ]
 
 MIDDLEWARE = [
@@ -153,3 +156,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'user_app.CustomUser'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
