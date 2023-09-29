@@ -21,6 +21,13 @@ from django.conf.urls.static import static
 
 from django.contrib import admin
 from django.urls import path, include
+from django.views.decorators.cache import cache_page
+from .views import YourProductDetailView
+
+urlpatterns = [
+    path('product/<int:pk>/', cache_page(60 * 15)(YourProductDetailView.as_view()), name='product-detail'),  # кешируется на 15 минут
+]
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
