@@ -1,10 +1,13 @@
+#views.py
+
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
+from django.contrib.auth import views as auth_views
+from django.views.generic.edit import CreateView
 from .models import Product
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
@@ -20,9 +23,6 @@ class ProductListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'product_list.html'
 
-
-from django.views.generic.edit import CreateView
-from .models import Product
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
