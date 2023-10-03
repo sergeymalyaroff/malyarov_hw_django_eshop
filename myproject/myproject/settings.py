@@ -14,6 +14,10 @@ import os
 from pathlib import Path
 from decouple import config, Csv
 
+
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -226,8 +230,16 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 # База данных
 import dj_database_url
 DATABASES = {
-    'default': dj_database_url.config(default=config('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+    }
 }
+
 
 # Электронная почта
 EMAIL_HOST = config('EMAIL_HOST', default='localhost')
@@ -235,3 +247,20 @@ EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+
+
+#настройки кеширования
+USE_CACHE = config('USE_CACHE', default=False, cast=bool)
+
+if USE_CACHE:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+            'LOCATION': config('CACHE_DIR', default='/tmp/django_cache/'),
+            'TIMEOUT': config('CACHE_TIMEOUT', default=300, cast=int),  # 5 minutes
+            'OPTIONS': {
+                'MAX_ENTRIES': config('CACHE_MAX_ENTRIES', default=1000, cast=int),
+                'CULL_FREQUENCY': config('CACHE_CULL_FREQUENCY', default=3, cast=int),
+            },
+        }
+    }
